@@ -35,6 +35,11 @@ const header = (props) => {
                 Countries
               </Link>
             </li>
+            <li className="nav-item active">
+              <Link className={"nav-link"} to={"/categories"}>
+                Categories
+              </Link>
+            </li>
           </ul>
           {/*<form className="form-inline mt-2 mt-md-0 ml-3">*/}
           {/*    {authenticate}*/}

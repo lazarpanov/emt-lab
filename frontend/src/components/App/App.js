@@ -9,6 +9,7 @@ import Header from "../Header/header";
 import EShopService from "../../repository/eshopRepository";
 import BookAdd from "../Books/BookAdd/bookAdd";
 import BookEdit from "../Books/BookEdit/bookEdit";
+import Categories from "../Categories/categories";
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class App extends Component {
       countires: [],
       books: [],
       categories: [],
-      selectedBook: {}
+      selectedBook: {},
     };
   }
 
@@ -38,6 +39,11 @@ class App extends Component {
                 path={"/countries"}
                 exact
                 render={() => <Countries countries={this.state.countires} />}
+              />
+              <Route
+                path={"/categories"}
+                exact
+                render={() => <Categories categories={this.state.categories} />}
               />
               <Route
                 path={"/books/add"}
@@ -68,7 +74,12 @@ class App extends Component {
                 path={"/books"}
                 exact
                 render={() => (
-                  <Books books={this.state.books} onDelete={this.deleteBook} onEdit={this.getBook}  onTakeBook={this.takeBook}/>
+                  <Books
+                    books={this.state.books}
+                    onDelete={this.deleteBook}
+                    onEdit={this.getBook}
+                    onTakeBook={this.takeBook}
+                  />
                 )}
               />
               <Redirect to={"/books"} />
@@ -106,34 +117,38 @@ class App extends Component {
   loadCategories = () => {
     EShopService.fetchCategories().then((data) => {
       this.setState({
-        categories: data.data
-      })
-    })
-  }
+        categories: data.data,
+      });
+    });
+  };
 
   deleteBook = (id) => {
     EShopService.deleteBook(id).then(() => this.loadBooks());
   };
 
   addBook = (name, category, author, availableCopies) => {
-    EShopService.addBook(name, category, author, availableCopies).then(() => this.loadBooks());
+    EShopService.addBook(name, category, author, availableCopies).then(() =>
+      this.loadBooks()
+    );
   };
 
   getBook = (id) => {
     EShopService.getBook(id).then((data) => {
       this.setState({
-        selectedBook: data.data
-      })
-    })
-  }
+        selectedBook: data.data,
+      });
+    });
+  };
 
   editBook = (id, name, category, author, availableCopies) => {
-    EShopService.editBook(id, name, category, author, availableCopies).then(() => this.loadBooks());
-  }
+    EShopService.editBook(id, name, category, author, availableCopies).then(
+      () => this.loadBooks()
+    );
+  };
 
   takeBook = (id) => {
-    EShopService.takeBook(id).then(() => this.loadBooks())
-  }
+    EShopService.takeBook(id).then(() => this.loadBooks());
+  };
 
   componentDidMount() {
     this.loadAuthors();

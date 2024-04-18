@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="emt-lab" target="21" />
+      <module name="emt-lab" target="20" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
