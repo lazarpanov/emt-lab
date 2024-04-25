@@ -37,7 +37,14 @@ const EShopService = {
     },
     takeBook: (id) => {
         return axios.post(`/books/rent/${id}`)
-    }
+    },
+    addAuthor: (name, surname, country) => {
+        return axios.post("/authors/add", {
+            "name" : name,
+            "surname" : surname,
+            "country" : country
+        })
+    },
 }
 
 export default EShopService;

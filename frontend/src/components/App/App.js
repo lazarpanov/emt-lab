@@ -10,6 +10,7 @@ import EShopService from "../../repository/eshopRepository";
 import BookAdd from "../Books/BookAdd/bookAdd";
 import BookEdit from "../Books/BookEdit/bookEdit";
 import Categories from "../Categories/categories";
+import AuthorAdd from "../Authors/AuthorAdd/authorAdd";
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +31,16 @@ class App extends Component {
         <Route>
           <main>
             <div className="container">
+              <Route
+                path={"/authors/add"}
+                exact
+                render={() => (
+                  <AuthorAdd
+                    countries={this.state.countires}
+                    onAddAuthor={this.addAuthor}
+                  />
+                )}
+              />
               <Route
                 path={"/authors"}
                 exact
@@ -156,6 +167,12 @@ class App extends Component {
     this.loadBooks();
     this.loadCategories();
   }
+
+  addAuthor = (name, surname, country) => {
+    EShopService.addAuthor(name, surname, country).then(() =>
+      this.loadAuthors()
+    );
+  };
 }
 
 export default App;

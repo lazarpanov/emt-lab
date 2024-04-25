@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const authors = (props) => {
     return (
@@ -26,6 +27,9 @@ const authors = (props) => {
                         </tbody>
                     </table>
                 </div>
+                <Link className={"btn btn-block btn-dark"} to={"/authors/add"}>
+                  Add new author
+                </Link>
             </div>
         </div>
     );
